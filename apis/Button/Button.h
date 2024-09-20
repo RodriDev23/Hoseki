@@ -14,6 +14,7 @@ struct types_onclick {
 };
 
 class Button {
+public:
   float x_position, y_position;
   float width, height;
   Color backgroundColor;
@@ -32,7 +33,7 @@ class Button {
   Button &setBorderColor(Color color_u);
   Button &setBorderWidth(float border_w_u);
   Button &setText(string user_value, Color color_text_user);
-  Button &addChild(const Button &children_div);
+  Button &onHover();
 
   void draw();
 };
