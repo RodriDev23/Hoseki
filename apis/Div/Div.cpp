@@ -1,4 +1,7 @@
 #include "Div.h"
+#include <cmath>
+#include <cstdint>
+#include <string>
 
 Div::Div()
     : x_position(20.0), y_position(20.0), width(150), height(25),
@@ -52,7 +55,13 @@ void Div::draw() {
                          borderWidth, borderColor);
   }
   if (!value.empty()) {
-    DrawText(value.c_str(), x_position + 25, y_position + 2, 20, color_text);
+    const uint32_t font_value = 20;
+    uint32_t text_width = MeasureText(value.c_str(), font_value);
+    uint32_t x_position_center = x_position + (width - text_width) / 2;
+    uint32_t y_position_center = y_position + (height - font_value) / 2;
+
+    DrawText(value.c_str(), x_position_center, y_position_center, font_value,
+             color_text);
   }
   for (auto &child : childrens) {
     child.draw();

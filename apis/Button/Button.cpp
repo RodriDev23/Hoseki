@@ -65,7 +65,7 @@ Button &Button::OnClick(function<void()> fun_user) {
   float mouse_y = GetMouseY();
   Rectangle mouse_rect = {mouse_x, mouse_y, 1, 1};
   Rectangle user_rect = {this->x_position, this->y_position, this->width,
-                         this->height}; // Use this->
+                         this->height};
 
   if (CheckCollisionRecs(mouse_rect, user_rect) &&
       IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {

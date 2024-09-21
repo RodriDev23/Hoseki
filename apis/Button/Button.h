@@ -14,6 +14,10 @@ struct types_onclick {
 };
 
 class Button {
+
+private:
+  function<void()> onClickCallback;
+
 public:
   float x_position, y_position;
   float width, height;
@@ -34,6 +38,7 @@ public:
   Button &setBorderWidth(float border_w_u);
   Button &setText(string user_value, Color color_text_user);
   Button &onHover();
+  Button &OnClick(function<void()> fun_user);
 
   void draw();
 };
