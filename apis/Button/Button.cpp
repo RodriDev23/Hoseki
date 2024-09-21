@@ -1,7 +1,5 @@
 #include "Button.h"
 #include "../Tailwind/tailwind_api.h"
-#include <iostream>
-#include <ostream>
 #include <raylib.h>
 using namespace std;
 
@@ -54,16 +52,27 @@ Button &Button::onHover() {
 
   if (CheckCollisionRecs(mouse_rect, user_rect)) {
     SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-    cout << "hover here" << endl;
   } else {
     SetMouseCursor(MOUSE_CURSOR_DEFAULT);
   }
+
+  return *this;
+}
+
+Button &Button::OnClick(function<void()> fun_user) {
+  onClickCallback = fun_user;
+  float mouse_x = GetMouseX();
+  float mouse_y = GetMouseY();
+  Rectangle mouse_rect = {mouse_x, mouse_y, 1, 1};
+  Rectangle user_rect = {this->x_position, this->y_position, this->width,
+                         this->height}; // Use this->
+
   if (CheckCollisionRecs(mouse_rect, user_rect) &&
       IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-    cout << "click it  here" << endl;
     this->backgroundColor = TailwindAPI::gray100;
+    onClickCallback();
+    return *this;
   }
-
   return *this;
 }
 
